@@ -1,0 +1,1 @@
+# terraform-singlenode-kubernetes-template
