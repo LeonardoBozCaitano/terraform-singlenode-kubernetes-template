@@ -5,10 +5,8 @@ snap install microk8s --classic --channel=1.16/stable
 microk8s status --wait-ready
 
 microk8s.enable dns dashboard helm
-alias microk8s.helm helm
-alias microk8s.kubectl kubectl
-kubectl proxy --accept-hosts=.* --address=0.0.0.0 &
-kubectl config view --raw >~/.kube/config
+microk8s.kubectl proxy --accept-hosts=.* --address=0.0.0.0 &
+microk8s.kubectl config view --raw >~/.kube/config
 
 mkdir /home/k8s && \
   groupadd -r k8s && \

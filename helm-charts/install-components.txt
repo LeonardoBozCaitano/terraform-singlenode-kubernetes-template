@@ -1,0 +1,4 @@
+microk8s.kubectl apply -f helm-rbac.yaml
+
+microk8s.helm init --service-account tiller
+

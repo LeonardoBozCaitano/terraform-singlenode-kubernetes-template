@@ -1,5 +1,0 @@
-helm init --service-account tiller
-
-helm install mongodb stable/mongodb --namespace backend -f mongodb/values.yaml
-
-helm install stable/nginx-ingress --name my-nginx --set rbac.create=true
