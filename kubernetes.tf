@@ -112,18 +112,8 @@ resource "aws_instance" "web_server" {
     network_interface_id = aws_network_interface.public1.id
   }
 
-  user_data = <<-EOF
-              #!/bin/bash
-              sudo su
-              apt update -y
-              snap install microk8s --classic --channel=1.16/stable
-              microk8s status --wait-ready
-
-              microk8s.enable dns dashboard ingress
-              microk8s.enable fluentd
-
-              microk8s.kubectl proxy --accept-hosts=.* --address=0.0.0.0 &
-              EOF
+  user_data = file("start_k8s.sh")
+  
   tags = {
     Name = "${var.environment}_cluster_k8s"
   }
