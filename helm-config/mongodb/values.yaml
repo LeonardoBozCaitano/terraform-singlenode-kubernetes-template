@@ -31,8 +31,6 @@ securityContext:
   fsGroup: 1001
   runAsUser: 1001
 
-clusterDomain: cluster.local
-
 service:
   annotations: {}
   type: ClusterIP
