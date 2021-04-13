@@ -1,135 +1,17 @@
+replicaCount: 1
 image:
-  registry: docker.io
-  repository: bitnami/mongodb
-  tag: 4.0.14-debian-9-r0
+  repository: mongo
+  tag: 3.5.11
   pullPolicy: IfNotPresent
-  debug: false
-
-volumePermissions:
-  enabled: false
-  image:
-    registry: docker.io
-    repository: bitnami/minideb
-    tag: stretch
-    pullPolicy: Always
-  resources: {}
-
-usePassword: true
-mongodbRootPassword: mongodb123
-
-mongodbUsername: development
-mongodbPassword: mongodb123
-mongodbDatabase: public
-mongodbEnableIPv6: false
-mongodbDirectoryPerDB: false
-mongodbSystemLogVerbosity: 0
-mongodbDisableSystemLog: false
-
-mongodbExtraFlags: []
-securityContext:
-  enabled: true
-  fsGroup: 1001
-  runAsUser: 1001
-
 service:
-  annotations: {}
+  name: mongo
+  tier: backend
   type: ClusterIP
-  port: 27017
-
-replicaSet:
-  enabled: false
-  useHostnames: true
-  name: rs0
-  replicas:
-    primary: 1
-    secondary: 1
-    arbiter: 1
-  pdb:
-    enabled: true
-    minAvailable:
-      primary: 1
-      secondary: 1
-      arbiter: 1
-
-podAnnotations: {}
-
-podLabels: {}
-
+  protocol: TCP
+  externalPort: 27017
+  internalPort: 27017
 resources:
   limits:
-    cpu: 500m
-    memory: 1024Mi
+    memory: 512Mi
   requests:
-    cpu: 500m
-    memory: 1024Mi
-
-resourcesArbiter: {}
-
-affinity: {}
-
-affinityArbiter: {}
-
-tolerations:
-  - operator: Exists
-    effect: NoExecute
-  - operator: Exists
-    effect: NoSchedule
-
-updateStrategy:
-  type: Recreate
-
-persistence:
-  enabled: true
-  mountPath: /bitnami/mongodb
-  subPath: ""
-  storageClass: "gp2-us-east-1a"
-  accessModes:
-    - ReadWriteOnce
-  size: 120Gi
-  annotations: {}
-
-ingress:
-  enabled: false
-  certManager: false
-  annotations:
-    kubernetes.io/ingress.class: nginx
-  hosts:
-    - name: mongodb.leonardobozcaitano.com
-      path: /
-
-  tls:
-    - hosts:
-        - mongodb.leonardobozcaitano.com
-      secretName: mongodb-tls
-  secrets:
-
-livenessProbe:
-  enabled: true
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 6
-  successThreshold: 1
-readinessProbe:
-  enabled: true
-  initialDelaySeconds: 5
-  periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 6
-  successThreshold: 1
-
-initConfigMap: {}
-
-metrics:
-  enabled: true
-  image:
-    registry: docker.io
-    repository: bitnami/mongodb-exporter
-    tag: 0.11.2-debian-10-r79
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+    memory: 128Mi
