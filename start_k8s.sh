@@ -15,9 +15,8 @@ mkdir /home/k8s && \
   chown k8s:k8s /home/k8s
 
 USER k8s
-
+cd home/k8s
 git clone https://github.com/LeonardoBozCaitano/terraform-singlenode-kubernetes-template.git
-
 cd terraform-singlenode-kubernetes-template/helm-config
 
 sh install-components.txt
