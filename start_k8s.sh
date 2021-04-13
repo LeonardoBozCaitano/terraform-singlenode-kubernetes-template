@@ -6,6 +6,7 @@ microk8s status --wait-ready
 
 microk8s.enable dns dashboard ingress
 microk8s.kubectl proxy --accept-hosts=.* --address=0.0.0.0 &
+microk8s.kubectl config view --raw >~/.kube/config
 
 snap install helm --classic
 
