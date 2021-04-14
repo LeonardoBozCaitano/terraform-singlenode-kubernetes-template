@@ -107,13 +107,18 @@ resource "aws_instance" "web_server" {
   availability_zone = var.aws_used_availability_zone
   key_name = var.aws_pem_key_name
 
+  user_data = file("start_k8s.sh")
+
+  root_block_device {
+    volume_size = 20
+    volume_type = "gp2"
+  }
+
   network_interface {
     device_index = 0
     network_interface_id = aws_network_interface.public1.id
   }
 
-  user_data = file("start_k8s.sh")
-  
   tags = {
     Name = "${var.environment}_cluster_k8s"
   }

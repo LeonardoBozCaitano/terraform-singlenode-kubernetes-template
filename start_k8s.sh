@@ -19,15 +19,14 @@ microk8s.enable ingress
 microk8s.enable fluentd
 microk8s.enable helm3
 snap alias microk8s.helm3 helm
+snap alias microk8s.kubectl kubectl
 
-microk8s.kubectl proxy --accept-hosts=.* --address=0.0.0.0 &
-microk8s.kubectl config view --raw >~/.kube/config
+kubectl proxy --accept-hosts=.* --address=0.0.0.0 &
+kubectl config view --raw >~/.kube/config
+kubectl apply -f persistence-volume/values.yaml
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install --values=mongodb/values.yaml bitnami/mongodb --generate-name
-helm install jenkins bitnami/jenkins
-
-helm install bitnami/mongodb mongodb --values .yaml
-
+#helm install jenkins bitnami/jenkins
 
 mkdir ./ready
