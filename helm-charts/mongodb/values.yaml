@@ -80,16 +80,6 @@ tolerations:
 updateStrategy:
   type: Recreate
 
-persistence:
-  enabled: true
-  mountPath: /bitnami/mongodb
-  subPath: ""
-  storageClass: "gp2-us-east-1a"
-  accessModes:
-    - ReadWriteOnce
-  size: 120Gi
-  annotations: {}
-
 ingress:
   enabled: false
   certManager: false
