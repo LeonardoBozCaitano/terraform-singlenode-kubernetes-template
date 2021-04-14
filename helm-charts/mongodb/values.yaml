@@ -84,7 +84,7 @@ persistence:
   enabled: true
   mountPath: /bitnami/mongodb
   subPath: ""
-  storageClass: "gp2-us-east-1a"
+  storageClass: "mongo-db-persistence"
   accessModes:
     - ReadWriteOnce
   size: 10Gi
