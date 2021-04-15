@@ -43,6 +43,14 @@ resource "aws_security_group" "public" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  ingress {
+    description = "HTTP"
+    from_port   = 32760
+    to_port     = 32760
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   
   ingress {
     description = "HTTP"
