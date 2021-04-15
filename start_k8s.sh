@@ -8,6 +8,7 @@ microk8s.enable dns
 microk8s.enable dashboard
 microk8s.enable ingress
 microk8s.enable helm3
+microk8s.enable storage
 snap alias microk8s.helm3 helm
 snap alias microk8s.kubectl kubectl
 
