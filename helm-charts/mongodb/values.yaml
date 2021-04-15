@@ -1,57 +1,46 @@
-image:
-  registry: docker.io
-  repository: bitnami/mongodb
-  tag: 4.0.14-debian-9-r0
-  pullPolicy: IfNotPresent
-  debug: false
-
-usePassword: true
-mongodbRootPassword: mongodb123
-
-mongodbUsername: development
-mongodbPassword: mongodb123
-mongodbDatabase: public
-mongodbEnableIPv6: false
-mongodbDirectoryPerDB: false
-mongodbSystemLogVerbosity: 0
-mongodbDisableSystemLog: false
-
-service:
-  annotations: {}
-  type: ClusterIP
-  port: 27017
-
-replicaSet:
-  enabled: false
-  useHostnames: true
-  name: rs0
-  replicas:
-    primary: 1
-    secondary: 1
-    arbiter: 1
-  pdb:
-    enabled: true
-    minAvailable:
-      primary: 1
-      secondary: 1
-      arbiter: 1
-
-resources:
-  limits:
-    cpu: 500m
-    memory: 1024Mi
-  requests:
-    cpu: 500m
-    memory: 1024Mi
-
+mongodb:
+  fullnameOverride: mongodb-stage
+  image:
+    repository: bitnami/mongodb
+    tag: 4.2.8-debian-10-r24
+auth:
+  rootPassword: 123456789
+strategyType: Recreate
+nodeSelector:
+  environment: "stage"
 tolerations:
   - operator: Exists
     effect: NoExecute
   - operator: Exists
     effect: NoSchedule
-
-updateStrategy:
-  type: Recreate
+resources:
+  limits:
+    cpu: 200m
+    memory: 1536Mi
+  requests:
+    cpu: 150m
+    memory: 1536Mi
+extraFlags:
+  - "--wiredTigerCacheSizeGB=0.25"
+externalAccess:
+  enabled: true
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+pdb:
+  create: true
+  minAvailable: 1
 
 persistence:
   enabled: true
@@ -60,4 +49,39 @@ persistence:
   accessModes:
     - ReadWriteOnce
   size: 10Gi
-  annotations: {}
+
+arbiter:
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 96Mi
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+    successThreshold: 1
+metrics:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnami/mongodb-exporter
+    tag: 0.11.2-debian-10-r79
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
