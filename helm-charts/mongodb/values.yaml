@@ -5,15 +5,6 @@ image:
   pullPolicy: IfNotPresent
   debug: false
 
-volumePermissions:
-  enabled: false
-  image:
-    registry: docker.io
-    repository: bitnami/minideb
-    tag: stretch
-    pullPolicy: Always
-  resources: {}
-
 usePassword: true
 mongodbRootPassword: mongodb123
 
@@ -63,13 +54,6 @@ tolerations:
 
 updateStrategy:
   type: Recreate
-
-persistence:
-  mountPath: /db
-  subPath: ""
-  storageClassName: "mongo-db-persistence"
-  accessModes: ["ReadWriteOnce"]
-  size: 2Gi
 
 ingress:
   enabled: false
