@@ -6,8 +6,6 @@ mongodb:
 auth:
   rootPassword: 123456789
 strategyType: Recreate
-nodeSelector:
-  environment: "stage"
 tolerations:
   - operator: Exists
     effect: NoExecute
