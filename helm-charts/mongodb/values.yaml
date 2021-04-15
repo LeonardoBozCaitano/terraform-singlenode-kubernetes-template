@@ -5,6 +5,15 @@ image:
   pullPolicy: IfNotPresent
   debug: false
 
+volumePermissions:
+  enabled: false
+  image:
+    registry: docker.io
+    repository: bitnami/minideb
+    tag: stretch
+    pullPolicy: Always
+  resources: {}
+
 usePassword: true
 mongodbRootPassword: mongodb123
 
@@ -54,6 +63,15 @@ tolerations:
 
 updateStrategy:
   type: Recreate
+
+persistence:
+  enabled: true
+  mountPath: /bitnami/mongodb
+  subPath: ""
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi
+  annotations: {}
 
 ingress:
   enabled: false

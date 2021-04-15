@@ -23,7 +23,7 @@ cd home/k8s
 git clone https://github.com/LeonardoBozCaitano/terraform-singlenode-kubernetes-template.git
 cd terraform-singlenode-kubernetes-template/helm-charts
 
-kubectl apply -f persistence-volume/values.yaml
+#kubectl apply -f persistence-volume/values.yaml
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install --values=mongodb/values.yaml bitnami/mongodb --generate-name
