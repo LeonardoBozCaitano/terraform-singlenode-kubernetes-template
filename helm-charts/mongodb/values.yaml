@@ -82,7 +82,7 @@ updateStrategy:
 
 persistence:
   enabled: true
-  mountPath: /bitnami/mongodb
+  mountPath: /
   subPath: ""
   storageClass: "mongo-db-persistence"
   accessModes:
