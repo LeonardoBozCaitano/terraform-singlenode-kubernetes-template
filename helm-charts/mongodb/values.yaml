@@ -82,8 +82,6 @@ updateStrategy:
 
 persistence:
   enabled: true
-  mountPath: /
-  subPath: ""
   storageClass: "mongo-db-persistence"
   accessModes:
     - ReadWriteOnce
