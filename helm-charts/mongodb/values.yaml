@@ -25,12 +25,6 @@ mongodbDirectoryPerDB: false
 mongodbSystemLogVerbosity: 0
 mongodbDisableSystemLog: false
 
-mongodbExtraFlags: []
-securityContext:
-  enabled: true
-  fsGroup: 1001
-  runAsUser: 1001
-
 clusterDomain: cluster.local
 
 service:
@@ -53,10 +47,6 @@ replicaSet:
       secondary: 1
       arbiter: 1
 
-podAnnotations: {}
-
-podLabels: {}
-
 resources:
   limits:
     cpu: 500m
@@ -64,12 +54,6 @@ resources:
   requests:
     cpu: 500m
     memory: 1024Mi
-
-resourcesArbiter: {}
-
-affinity: {}
-
-affinityArbiter: {}
 
 tolerations:
   - operator: Exists
@@ -81,12 +65,11 @@ updateStrategy:
   type: Recreate
 
 persistence:
-  enabled: true
-  storageClass: "mongo-db-persistence"
-  accessModes:
-    - ReadWriteOnce
-  size: 10Gi
-  annotations: {}
+  mountPath: /db
+  subPath: ""
+  storageClassName: "mongo-db-persistence"
+  accessModes: ["ReadWriteOnce"]
+  size: 2Gi
 
 ingress:
   enabled: false
@@ -117,8 +100,6 @@ readinessProbe:
   timeoutSeconds: 5
   failureThreshold: 6
   successThreshold: 1
-
-initConfigMap: {}
 
 metrics:
   enabled: false
