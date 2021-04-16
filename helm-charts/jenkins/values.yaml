@@ -70,7 +70,7 @@ Master:
   ServicePort: 8080
   # For minikube, set this to NodePort, elsewhere use LoadBalancer
   # Use ClusterIP if your setup includes ingress controller
-  ServiceType: NodePort
+  ServiceType: ClusterIP
   # Master Service annotations
   ServiceAnnotations: {}
   # Master Custom Labels
@@ -83,8 +83,8 @@ Master:
   # Put labels on jeknins-master pod
   PodLabels: {}
   # Used to create Ingress record (should used with ServiceType: ClusterIP)
-  # HostName: jenkins.cluster.local
-  NodePort: 32760
+  HostName: jenkins.cluster.local
+  # NodePort: <to set explicitly, choose port between 30000-32767
   # Enable Kubernetes Liveness and Readiness Probes
   # ~ 2 minutes to allow Jenkins to restart when upgrading plugins. Set ReadinessTimeout to be shorter than LivenessTimeout.
   HealthProbes: true
