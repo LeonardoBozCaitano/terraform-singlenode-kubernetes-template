@@ -27,10 +27,7 @@ cd terraform-singlenode-kubernetes-template/charts
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
-helm install mongodb bitnami/mongodb --values=mongodb/values.yaml
-
-kubectl create namespace jenkins
-# helm install jenkins bitnami/jenkins --values=jenkins/values.yaml --namespace jenkins
-# kubectl --namespace jenkins port-forward jenkins-6fc5b56f5d-96hgn 8080:8080
+helm install --values=mongodb/values.yaml bitnami/mongodb --generate-name
+helm install --values=jenkins/values.yaml bitnami/jenkins --generate-name
 
 mkdir ./ready
