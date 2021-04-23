@@ -25,10 +25,5 @@ cd home/k8s
 git clone https://github.com/LeonardoBozCaitano/terraform-singlenode-kubernetes-template.git
 cd terraform-singlenode-kubernetes-template/charts
 
-kubectl -n kube-system edit deploy kubernetes-dashboard -f dashboard/values.yaml
-
 helm repo add bitnami https://charts.bitnami.com/bitnami
-
 helm install --values=mongodb/values.yaml bitnami/mongodb --generate-name
-
-mkdir ./ready
