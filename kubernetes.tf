@@ -120,6 +120,6 @@ resource "aws_instance" "web_server" {
   }
 
   tags = {
-    Name = "${var.environment}_cluster_k8s"
+    Name = "${var.environment}_k8s"
   }
 }
