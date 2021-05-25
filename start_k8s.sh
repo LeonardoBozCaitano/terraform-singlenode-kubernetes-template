@@ -13,7 +13,7 @@ snap alias microk8s.helm3 helm
 snap alias microk8s.kubectl kubectl
 
 kubectl proxy --accept-hosts=.* --address=0.0.0.0 &
-kubectl config view --raw >~/.kube/config
+kubectl config > /.kube/config
 helm init
 
 mkdir /home/k8s && \
