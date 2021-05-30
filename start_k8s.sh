@@ -9,11 +9,12 @@ microk8s.enable dashboard
 microk8s.enable ingress
 microk8s.enable helm3
 microk8s.enable storage
+microk8s.enable fluentd
 snap alias microk8s.helm3 helm
 snap alias microk8s.kubectl kubectl
 
 kubectl proxy --accept-hosts=.* --address=0.0.0.0 &
-kubectl config > /.kube/config
+microk8s config > /.kube/config
 helm init
 
 mkdir /home/k8s && \
