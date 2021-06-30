@@ -1,30 +1,17 @@
 #!/bin/bash
-sudo su
-apt update -y
+sudo apt update -y
+sudo groupadd k8s
+sudo useradd -m -r -g k8s k8s
+mkdir /home/k8s/.kube
+
 snap install microk8s --classic --channel=1.21/stable
+
+sudo usermod -a -G microk8s k8s
+sudo chown -f -R k8s ~/.kube
+
 microk8s status --wait-ready
-
-microk8s.enable dns
-microk8s.enable dashboard
-microk8s.enable ingress
+microk8s config > ~/.kube/config
 microk8s.enable helm3
-microk8s.enable storage
-microk8s.enable fluentd
-snap alias microk8s.helm3 helm
+
 snap alias microk8s.kubectl kubectl
-
-kubectl proxy --accept-hosts=.* --address=0.0.0.0 &
-microk8s config > /.kube/config
-helm init
-
-mkdir /home/k8s && \
-  groupadd -r k8s && \
-  useradd -s /bin/bash -d /home/k8s -r -g k8s k8s && \
-  chown k8s:k8s /home/k8s
-
-cd home/k8s
-git clone https://github.com/LeonardoBozCaitano/terraform-singlenode-kubernetes-template.git
-cd terraform-singlenode-kubernetes-template/charts
-
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install --values=mongodb/values.yaml bitnami/mongodb --generate-name
+snap alias microk8s.helm3 helm
