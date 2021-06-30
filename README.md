@@ -1,12 +1,10 @@
 # Terraform SingleNode Kubernetes Implementation
 
-This template use terraform to create the infrastructure on AWS with the VPC configured and an instance t3.medium, and on instance creation it already install Microk8s kubernetes single node environment.
-
-The kubernetes came with dashboards, ingress, and mongodb already installed and configured.
+This template use terraform to create the infrastructure on AWS with the VPC configured and an instance t3.medium, on instance creation it already install Microk8s kubernetes single node environment.
 
 ## How to use
 
-You just have to apply the terraform template, and be happy with your kubernetes! :)
+You just have to apply the terraform template, and be happy with your simple and cheap kubernetes environment! :)
 
 ## How much it costs?
 
